@@ -1,98 +1,79 @@
-# flowscore-ai
+# FlowScore AI
 
-Simple ReAct agent
-Agent generated with `agents-cli` version `0.5.0`
+AI-powered alternative credit scoring for gig workers, freelancers, and underserved individuals using cash-flow analysis instead of traditional credit history.
 
-## Project Structure
+![Architecture](architecture.png)
 
-```
-flowscore-ai/
-├── app/         # Core agent code
-│   ├── agent.py               # Main agent logic
-│   ├── agent_runtime_app.py    # Agent Runtime application logic
-│   └── app_utils/             # App utilities and helpers
-├── tests/                     # Unit, integration, and load tests
-├── GEMINI.md                  # AI-assisted development guide
-└── pyproject.toml             # Project dependencies
-```
+## Problem Statement
 
-> 💡 **Tip:** Use [Gemini CLI](https://github.com/google-gemini/gemini-cli) for AI-assisted development - project context is pre-configured in `GEMINI.md`.
+Millions of freelancers, gig workers, and self-employed individuals struggle to access loans because they lack formal credit histories. Traditional credit scoring systems often fail to evaluate their actual financial stability.
 
-## Requirements
+## Solution
 
-Before you begin, ensure you have:
-- **uv**: Python package manager (used for all dependency management in this project) - [Install](https://docs.astral.sh/uv/getting-started/installation/) ([add packages](https://docs.astral.sh/uv/concepts/dependencies/) with `uv add <package>`)
-- **agents-cli**: Agents CLI - Install with `uv tool install google-agents-cli`
-- **Google Cloud SDK**: For GCP services - [Install](https://cloud.google.com/sdk/docs/install)
+FlowScore AI analyzes transaction history, income patterns, spending behavior, and repayment records to generate a cash-flow-based credit score and risk assessment. This enables fairer financial inclusion for individuals outside conventional banking systems.
 
+## Key Features
 
-## Quick Start
+* Multi-Agent Architecture using Google ADK
+* MCP Server integration for financial data access
+* Cash-flow-based credit scoring
+* Risk assessment and eligibility recommendations
+* Streamlit dashboard for visualization
+* Security validation layer for financial workflows
 
-Install `agents-cli` and its skills if not already installed:
+## Technology Stack
 
-```bash
-uvx google-agents-cli setup
-```
+* Python
+* Google ADK
+* MCP (Model Context Protocol)
+* Streamlit
+* Gemini Models
+* GitHub
 
-Install required packages:
+## Architecture
 
-```bash
-agents-cli install
-```
+1. Security Agent validates requests.
+2. Financial Orchestrator coordinates analysis.
+3. MCP Server fetches transaction and income data.
+4. FlowScore Engine calculates credit score.
+5. Dashboard displays score and recommendations.
 
-Test the agent with a local web server:
+## Demo
 
-```bash
-agents-cli playground
-```
-
-Demo (Streamlit)
-
-A lightweight dashboard is included for local demonstrations. It uses the deterministic scoring utility and MCP mock tools.
+Run locally:
 
 ```bash
-python -m pip install streamlit
 streamlit run app/streamlit_app.py
 ```
 
-You can also use features from the [ADK](https://adk.dev/) CLI with `uv run adk`.
+## Sample Output
 
-## Commands
+* Flow Score: 499 / 850
+* Risk Category: Moderate Risk
+* Financial Recommendation Generated
 
-| Command              | Description                                                                                 |
-| -------------------- | ------------------------------------------------------------------------------------------- |
-| `agents-cli install` | Install dependencies using uv                                                         |
-| `agents-cli playground` | Launch local development environment                                                  |
-| `agents-cli lint`    | Run code quality checks                                                               |
-| `agents-cli eval`    | Evaluate agent behavior (generate, grade, analyze, and more — see `agents-cli eval --help`) |
-| `uv run pytest tests/unit tests/integration` | Run unit and integration tests                                                        |
-| `agents-cli deploy`  | Deploy agent to Agent Runtime                                                                |
-| `agents-cli publish gemini-enterprise` | Register deployed agent to Gemini Enterprise                    |
+## Future Enhancements
 
-## 🛠️ Project Management
+* Real bank statement integration
+* UPI transaction ingestion
+* Explainable AI scoring reports
+* Loan recommendation engine
+* Financial literacy assistant
 
-| Command | What It Does |
-|---------|--------------|
-| `agents-cli scaffold enhance` | Add CI/CD pipelines and Terraform infrastructure |
-| `agents-cli infra cicd` | One-command setup of entire CI/CD pipeline + infrastructure |
-| `agents-cli scaffold upgrade` | Auto-upgrade to latest version while preserving customizations |
+## Project Structure
 
----
-
-## Development
-
-Edit your agent logic in `app/agent.py` and test with `agents-cli playground` - it auto-reloads on save.
-
-## Deployment
-
-```bash
-gcloud config set project <your-project-id>
-agents-cli deploy
+```text
+flowscore-ai/
+├── app/
+├── tests/
+├── deployment/
+├── architecture.png
+├── README.md
+└── pyproject.toml
 ```
 
-To add CI/CD and Terraform, run `agents-cli scaffold enhance`.
-To set up your production infrastructure, run `agents-cli infra cicd`.
+## Author
 
-## Observability
-
-Built-in telemetry exports to Cloud Trace, BigQuery, and Cloud Logging.
+Dhana Laxmi
+B.Tech CSE (AIML)
+Neil Gogte Institute of Technology
