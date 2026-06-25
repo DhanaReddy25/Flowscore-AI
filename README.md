@@ -48,9 +48,8 @@ streamlit run app/streamlit_app.py
 
 ## Sample Output
 
-* Flow Score: 499 / 850
-* Risk Category: Moderate Risk
-* Financial Recommendation Generated
+*Flow Score: 499/850
+*Recommendation: Low cash-flow score
 
 ## Future Enhancements
 
