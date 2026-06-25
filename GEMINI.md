@@ -1,61 +1,150 @@
-# Coding Agent Guide
+# FlowScore AI – Development Guide
 
-## Prerequisites
+## Project Overview
 
-Install the CLI (one-time):
+FlowScore AI is a financial inclusion and alternative credit scoring system built using Google ADK, MCP (Model Context Protocol), and Streamlit.
+
+The project analyzes:
+
+* Transaction history
+* Income sources
+* Credit repayment behavior
+
+and generates a transparent Flow Score (300–850) that can help evaluate financial reliability for users with limited traditional credit history.
+
+---
+
+## Architecture
+
+### Core Components
+
+#### 1. ADK Multi-Agent Workflow
+
+Location: `app/agent.py`
+
+Agents:
+
+* Security Checkpoint Agent
+* Financial Orchestrator Agent
+* Income Analyzer Agent
+* Behavior Risk Analyst Agent
+
+Responsibilities:
+
+* Validate requests
+* Detect prompt injection attempts
+* Coordinate financial analysis
+* Generate user recommendations
+
+#### 2. MCP Server
+
+Location: `app/mcp_server.py`
+
+Tools:
+
+* fetch_transaction_history
+* fetch_income_sources
+* check_credit_repayments
+* compute_flow_score_tool
+
+Responsibilities:
+
+* Provide financial data
+* Expose scoring functionality
+* Simulate external financial services
+
+#### 3. Flow Score Engine
+
+Location: `app/flow_score.py`
+
+Responsibilities:
+
+* Deterministic score calculation
+* Transparent and auditable logic
+* Score range: 300–850
+
+Factors:
+
+* Income stability
+* Spending behavior
+* Credit repayment history
+* Financial consistency
+
+#### 4. Streamlit Dashboard
+
+Location: `app/streamlit_app.py`
+
+Features:
+
+* User input interface
+* Transaction visualization
+* Flow Score display
+* Financial recommendations
+
+---
+
+## Local Development
+
+Install dependencies:
+
 ```bash
-uv tool install google-agents-cli
+agents-cli install
+```
+
+Run Streamlit demo:
+
+```bash
+streamlit run app/streamlit_app.py
+```
+
+Run tests:
+
+```bash
+pytest tests
+```
+
+Launch ADK playground:
+
+```bash
+agents-cli playground
 ```
 
 ---
 
-## Development Phases
+## Security Features
 
-### Phase 1: Understand Requirements
-Before writing any code, understand the project's requirements, constraints, and success criteria.
-
-### Phase 2: Build and Implement
-Implement agent logic in `app/`. Use `agents-cli playground` for interactive testing. Iterate based on user feedback.
-
-### Phase 3: The Evaluation Loop (Main Iteration Phase)
-Start with 1-2 eval cases, run `agents-cli eval generate`, then `agents-cli eval grade`, iterate by making changes and rerunning both commands until satisfied. Expect 5-10+ iterations. Once you have a baseline, reach for `agents-cli eval compare` (regression diffs), `agents-cli eval analyze` (cluster failure modes), and `agents-cli eval optimize` (auto-tune prompts). See the **Evaluation Guide** for metrics, dataset schema, LLM-as-judge config, and common gotchas.
-
-### Phase 4: Pre-Deployment Tests
-Run `uv run pytest tests/unit tests/integration`. Fix issues until all tests pass.
-
-### Phase 5: Deploy to Dev
-**Requires explicit human approval.** Run `agents-cli deploy` only after user confirms. See the **Deployment Guide** for details.
-
-### Phase 6: Production Deployment
-Ask the user: Option A (simple single-project) or Option B (full CI/CD pipeline with `agents-cli infra cicd`).
-
-## Development Commands
-
-| Command | Purpose |
-|---------|---------|
-| `agents-cli playground` | Interactive local testing |
-| `uv run pytest tests/unit tests/integration` | Run unit and integration tests |
-| `agents-cli eval dataset synthesize` | Synthesize multi-turn eval scenarios for your agent |
-| `agents-cli eval generate` | Run agent on eval dataset, produce traces |
-| `agents-cli eval grade` | Run agent evaluations on the traces |
-| `agents-cli eval compare` | Compare two grade-results files (regression check) |
-| `agents-cli eval analyze` | Cluster failure modes from grade results |
-| `agents-cli eval metric list` | List built-in metrics available in the SDK |
-| `agents-cli eval optimize` | Auto-tune agent prompts using eval data |
-| `agents-cli lint` | Check code quality |
-| `agents-cli infra single-project` | Set up project infrastructure (Terraform) |
-| `agents-cli deploy` | Deploy to dev |
-| `agents-cli scaffold enhance` | Add deployment target or CI/CD to project |
-| `agents-cli scaffold upgrade` | Upgrade project to latest version |
+* Prompt injection detection
+* PII protection
+* Audit logging
+* Tool access controls
 
 ---
 
-## Operational Guidelines for Coding Agents
+## Future Improvements
 
-- **Code preservation**: Only modify code directly targeted by the user's request. Preserve all surrounding code, config values (e.g., `model`), comments, and formatting.
-- **NEVER change the model** unless explicitly asked.
-- **Model 404 errors**: Fix `GOOGLE_CLOUD_LOCATION` (e.g., `global` instead of `us-east1`), not the model name.
-- **ADK tool imports**: Import the tool instance, not the module: `from google.adk.tools.load_web_page import load_web_page`
-- **Run Python with `uv`**: `uv run python script.py`. Run `agents-cli install` first.
-- **Stop on repeated errors**: If the same error appears 3+ times, fix the root cause instead of retrying.
-- **Terraform conflicts** (Error 409): Use `terraform import` instead of retrying creation.
+* Real bank API integrations
+* Advanced ML-based scoring
+* Fraud detection module
+* Personalized financial recommendations
+* Real-time analytics dashboard
+
+---
+
+## Kaggle Gen AI Intensive Course Submission
+
+Project: FlowScore AI
+
+Theme:
+Financial Inclusion through AI
+
+Technologies Used:
+
+* Google ADK
+* Gemini
+* MCP
+* Python
+* Streamlit
+
+Goal:
+Provide alternative credit scoring for underserved individuals using transparent AI-assisted financial analysis.
+ 409): Use `terraform import` instead of retrying creation.
