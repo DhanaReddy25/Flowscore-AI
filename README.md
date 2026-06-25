@@ -38,6 +38,10 @@ FlowScore AI analyzes transaction history, income patterns, spending behavior, a
 4. FlowScore Engine calculates credit score.
 5. Dashboard displays score and recommendations.
 
+## Dashboard Preview
+
+![Dashboard Preview](dashboard_result.png)
+
 ## Demo
 
 Run locally:
