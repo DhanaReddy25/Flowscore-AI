@@ -51,6 +51,12 @@ streamlit run app/streamlit_app.py
 *Flow Score: 499/850
 *Recommendation: Low cash-flow score
 
+## Why FlowScore AI?
+
+Traditional credit scoring often excludes freelancers, gig workers, and self-employed individuals.
+
+FlowScore AI focuses on actual cash-flow behavior rather than historical credit records, helping financial institutions evaluate underserved users more fairly and transparently.
+
 ## Future Enhancements
 
 * Real bank statement integration
