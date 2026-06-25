@@ -30,7 +30,7 @@ Deployment
 - MCP server is a local Python module (app.mcp_server) and can be run via uv or containerized
 
 Diagram
-- See architecture.svg (simple representation) or the textual diagram below.
+- See architecture.png(simple representation) or the textual diagram below.
 
 Textual diagram
 
